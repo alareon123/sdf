@@ -26,4 +26,4 @@ COPY . .
 EXPOSE 7860
 
 # Команда для запуска приложения (например, запуск веб-интерфейса)
-CMD ["python", "launch.py"]
+CMD ["python", "launch.py --api"]

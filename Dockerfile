@@ -17,6 +17,7 @@ WORKDIR /app
 # Копируем файл зависимостей и устанавливаем их
 COPY requirements.txt .
 RUN pip install --upgrade pip
+RUN pip install torch
 RUN pip install -r requirements.txt
 
 # Копируем весь проект в рабочую директорию

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  stable-diffusion:
+    build: .
+    ports:
+      - "7860:7860"  # Проброс порта для доступа к приложению
+    volumes:
+      - ./static/images:/app/static/images  # Проброс локальной папки для хранения изображений
+    environment:
+      - ENV_VAR_NAME=value  # Если нужны переменные окружения
+    command: python launch.py --api  # Команда для запуска приложения

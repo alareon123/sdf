@@ -17,7 +17,7 @@ WORKDIR /app
 # Копируем файл зависимостей и устанавливаем их
 COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt --progress-bar on --log /app/pip-log.txt
+RUN pip install --no-cache-dir -r requirements.txt --index-url https://pypi.doubanio.com/simple --log /app/pip-log.txt
 
 # Копируем весь проект в рабочую директорию
 COPY . .

@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Копируем только файл зависимостей
-COPY ./sdf/requirements.txt .
+COPY requirements.txt .
 
 # Обновляем pip и устанавливаем PyTorch с поддержкой CUDA (вместо CPU-версии)
 RUN pip install --upgrade pip setuptools
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir torch torchvision torchaudio --extra-index-url ht
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем всё остальное после установки зависимостей
-COPY ./sdf/ .
+COPY . .
 
 # Открываем порт 7860
 EXPOSE 7860

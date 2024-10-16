@@ -18,6 +18,11 @@ x-base_service: &base_service
               capabilities: [compute, utility]  # Используем GPU для вычислений и утилит
     runtime: nvidia  # Используем nvidia runtime для доступа к GPU
     command: python3 launch.py --api --listen --port 7860 --ckpt-dir /app/models  # Указываем путь к моделям и порты
+    logging:
+      driver: "json-file"  # Логи будут сохраняться в виде JSON-файлов
+      options:
+        max-size: "10m"  # Максимальный размер каждого файла лога (например, 10мб)
+        max-file: "5"  # Максимальное количество файлов лога (5 файлов по 10мб)
 
 services:
   stable-diffusion:

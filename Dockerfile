@@ -27,7 +27,7 @@ COPY requirements.txt .
 
 # Обновляем pip и устанавливаем PyTorch с поддержкой CUDA (вместо CPU-версии)
 RUN pip install --upgrade pip setuptools
-RUN pip install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN pip install -vvv --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
 
 # Устанавливаем остальные зависимости из requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

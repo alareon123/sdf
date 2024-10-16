@@ -1,12 +1,22 @@
 version: '3.8'
 
-services:
-  stable-diffusion:
+x-base_service:
     build: .
     ports:
-      - "7860:7860"  # Проброс порта для доступа к приложению
+      - "${WEBUI_PORT:-7860}:7860"  # Проброс порта для доступа к приложению
     volumes:
       - ./static/images:/app/static/images  # Проброс локальной папки для хранения изображений
+      - /home/ubuntu/sd-models:/app/models  # Проброс папки с моделями
     environment:
       - ENV_VAR_NAME=value  # Если нужны переменные окружения
-    command: python launch.py --api  # Команда для запуска приложения
+      - NVIDIA_VISIBLE_DEVICES=all  # Включить все доступные GPU
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility  # Необходимые GPU-способности
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']  # Указываем ID устройства (0 для одного GPU)
+              capabilities: [compute, utility]  # Используем GPU для вычислений и утилит
+    runtime: nvidia  # Используем nvidia runtime для доступа к GPU
+    command: python3 launch.py --api --listen --port 7860 --ckpt-dir /app/models  # Указываем путь к моделям и порты

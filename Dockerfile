@@ -1,6 +1,4 @@
-# stable_diffusion/Dockerfile (для GPU)
-
-# Используем официальный NVIDIA Python образ
+# Используем официальный NVIDIA Python образ с поддержкой GPU
 FROM nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu20.04
 
 # Устанавливаем необходимые системные зависимости
@@ -21,17 +19,18 @@ WORKDIR /app
 # Копируем только файл зависимостей
 COPY stable_diffusion/requirements.txt .
 
-# Устанавливаем зависимости из requirements.txt (кэшируется)
-# Обновляем pip и setuptools
+# Обновляем pip и устанавливаем PyTorch с поддержкой CUDA (вместо CPU-версии)
 RUN pip install --upgrade pip setuptools
-RUN pip install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+
+# Устанавливаем остальные зависимости из requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем всё остальное только после установки зависимостей
+# Копируем всё остальное после установки зависимостей
 COPY stable_diffusion/ .
 
 # Открываем порт 7860
 EXPOSE 7860
 
-# Команда для запуска приложения
-CMD ["python3", "launch.py", "--api", "--listen", "--port", "7860"]
+# Команда для запуска приложения с GPU, API, и внешней папкой для моделей
+CMD ["python3", "launch.py", "--api", "--listen", "--port", "7860", "--ckpt-dir", "/app/models"]

@@ -1,4 +1,4 @@
-# Используем официальный NVIDIA Python образ с поддержкой GPU
+# Используем официальный NVIDIA Python образ
 FROM nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu20.04
 
 # Устанавливаем переменную окружения для подавления интерактивных запросов
@@ -22,21 +22,23 @@ RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && dpkg-reconfigure --fron
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем только файл зависимостей
+# Копируем предварительно скачанный файл torch в контейнер
+COPY ./torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl /app/torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl
+
+# Устанавливаем torch из локального файла
+RUN pip install --no-cache-dir /app/torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl
+
+# Копируем файл зависимостей requirements.txt
 COPY requirements.txt .
 
-# Обновляем pip и устанавливаем PyTorch с поддержкой CUDA (вместо CPU-версии)
-RUN pip install --upgrade pip setuptools
-RUN pip install -vvv --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
-
-# Устанавливаем остальные зависимости из requirements.txt
+# Устанавливаем остальные зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем всё остальное после установки зависимостей
+# Копируем все остальные файлы
 COPY . .
 
 # Открываем порт 7860
 EXPOSE 7860
 
-# Команда для запуска приложения с GPU, API, и внешней папкой для моделей
+# Команда для запуска приложения
 CMD ["python3", "launch.py", "--api", "--listen", "--port", "7860", "--ckpt-dir", "/app/models"]

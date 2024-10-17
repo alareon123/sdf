@@ -26,8 +26,7 @@ WORKDIR /app
 COPY ./torch-packages /app/torch-packages
 
 # Вместо установки всех .whl файлов сразу, установим их по отдельности
-RUN pip install --no-cache-dir /app/torch-packages/MarkupSafe-3.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl \
-    && pip install --no-cache-dir /app/torch-packages/nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl \
+RUN pip install --no-cache-dir /app/torch-packages/nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/filelock-3.16.1-py3-none-any.whl \
     && pip install --no-cache-dir /app/torch-packages/fsspec-2024.9.0-py3-none-any.whl \
     && pip install --no-cache-dir /app/torch-packages/jinja2-3.1.4-py3-none-any.whl \

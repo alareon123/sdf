@@ -25,8 +25,8 @@ WORKDIR /app
 # Копируем скачанные пакеты Torch и его зависимости в контейнер
 COPY ./torch-packages /app/torch-packages
 
-# Устанавливаем torch из локального файла
-RUN pip install --no-cache-dir /app/torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl
+# Устанавливаем все пакеты из локальной директории
+RUN pip install --no-cache-dir /app/torch-packages/*.whl
 
 # Копируем файл зависимостей requirements.txt
 COPY requirements.txt .

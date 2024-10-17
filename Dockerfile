@@ -42,7 +42,6 @@ RUN pip install --no-cache-dir /app/torch-packages/nvidia_curand_cu12-10.3.2.106
     && pip install --no-cache-dir /app/torch-packages/nvidia_nccl_cu12-2.20.5-py3-none-manylinux2014_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/nvidia_nvjitlink_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/nvidia_nvtx_cu12-12.1.105-py3-none-manylinux1_x86_64.whl \
-    && pip install --no-cache-dir /app/torch-packages/pillow-11.0.0-cp310-cp310-manylinux_2_28_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/sympy-1.13.3-py3-none-any.whl \
     && pip install --no-cache-dir /app/torch-packages/torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/torchaudio-2.4.1-cp310-cp310-manylinux1_x86_64.whl \

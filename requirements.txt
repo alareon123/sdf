@@ -13,7 +13,7 @@ inflection
 jsonmerge
 kornia
 lark
-numpy==1.26.2
+numpy
 omegaconf
 open-clip-torch
 

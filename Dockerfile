@@ -22,8 +22,8 @@ RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && dpkg-reconfigure --fron
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем предварительно скачанный файл torch в контейнер
-COPY ./torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl /app/torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl
+# Копируем скачанные пакеты Torch и его зависимости в контейнер
+COPY ./torch-packages /app/torch-packages
 
 # Устанавливаем torch из локального файла
 RUN pip install --no-cache-dir /app/torch-2.4.1-cp310-cp310-manylinux1_x86_64.whl

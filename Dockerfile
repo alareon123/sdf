@@ -31,7 +31,6 @@ RUN pip install --no-cache-dir /app/torch-packages/nvidia_curand_cu12-10.3.2.106
     && pip install --no-cache-dir /app/torch-packages/fsspec-2024.9.0-py3-none-any.whl \
     && pip install --no-cache-dir /app/torch-packages/jinja2-3.1.4-py3-none-any.whl \
     && pip install --no-cache-dir /app/torch-packages/mpmath-1.3.0-py3-none-any.whl \
-    && pip install --no-cache-dir /app/torch-packages/numpy-2.1.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/nvidia_cublas_cu12-12.1.3.1-py3-none-manylinux1_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/nvidia_cuda_cupti_cu12-12.1.105-py3-none-manylinux1_x86_64.whl \
     && pip install --no-cache-dir /app/torch-packages/nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl \
